@@ -134,64 +134,104 @@
   .cta-meta{font-family:var(--font-mono); font-size:12.5px; color:var(--muted-2);}
   .cta-meta strong{color:var(--muted);}
 
-  /* ---------- GAUGE CLUSTER ---------- */
-  .cluster{
-    position:relative;
-    background:radial-gradient(circle at 50% 38%, var(--panel-2), var(--panel) 70%);
-    border:1px solid var(--border);
-    border-radius:24px;
-    padding:36px 24px 28px;
-    display:flex; flex-direction:column; align-items:center;
+  /* ---------- APP SCREENSHOT CAROUSEL / NEON MOCKUP ---------- */
+  .showcase-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
-  .cluster::after{
-    content:""; position:absolute; inset:0; border-radius:24px;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);
-    pointer-events:none;
+
+  .phone-mockup {
+    position: relative;
+    width: min(100%, 320px);
+    background: #111826;
+    border-radius: 36px;
+    /* Neon Çerçeve Stil Güncellemeleri */
+    border: 3px solid rgba(45, 212, 255, 0.85);
+    box-shadow: 
+      0 0 15px rgba(45, 212, 255, 0.6),
+      0 0 35px rgba(45, 212, 255, 0.35),
+      0 25px 50px -12px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+    aspect-ratio: 9 / 19.5; /* Modern telefon görünümü oranları */
   }
-  .gauge-wrap{position:relative; width:min(78vw, 300px); aspect-ratio:1/1;}
-  .gauge-wrap svg{width:100%; height:100%; overflow:visible;}
-  .gauge-tick{stroke:var(--border); stroke-width:2;}
-  .gauge-tick.major{stroke:var(--muted-2); stroke-width:2.5;}
-  .gauge-track{fill:none; stroke:var(--border-soft); stroke-width:12; stroke-linecap:round;}
-  .gauge-progress{
-    fill:none; stroke:url(#gaugeGrad); stroke-width:12; stroke-linecap:round;
-    filter:drop-shadow(0 0 8px rgba(45,212,255,0.55));
+
+  /* Ekranın içine hafif düşen neon yansıması */
+  .phone-mockup::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 33px; 
+    box-shadow: inset 0 0 20px rgba(45, 212, 255, 0.45);
+    pointer-events: none; /* Tıklamaları engellememesi için */
+    z-index: 10;
   }
-  .gauge-center{
-    position:absolute; inset:0; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; text-align:center;
+
+  .phone-screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    scrollbar-width: none; /* Firefox */
   }
-  .gauge-label{
-    font-family:var(--font-mono); font-size:10.5px; letter-spacing:0.14em;
-    color:var(--muted-2); text-transform:uppercase; margin-bottom:6px;
+
+  .phone-screen::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
-  .gauge-number{
-    font-family:var(--font-mono); font-weight:700;
-    font-size:clamp(26px, 6vw, 34px); color:var(--text);
-    letter-spacing:-0.01em; font-variant-numeric:tabular-nums;
-    text-shadow:0 0 18px rgba(45,212,255,0.25);
+
+  .slide-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
   }
-  .gauge-sub{
-    font-family:var(--font-mono); font-size:11px; color:var(--amber);
-    margin-top:6px; letter-spacing:0.04em;
+
+  .app-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+    position: relative;
   }
-  .cluster-readout{
-    display:flex; gap:28px; margin-top:22px; padding-top:20px;
-    border-top:1px dashed var(--border);
-    width:100%; justify-content:center;
+
+  /* Görsellerin çerçeveye tam oturması için */
+  .app-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    background: var(--panel); /* Görsel yüklenemezse arkaplan rengi */
   }
-  .readout-item{text-align:center;}
-  .readout-item .rv{
-    font-family:var(--font-mono); font-weight:600; font-size:18px; color:var(--text);
-    font-variant-numeric:tabular-nums;
+
+  /* Slider Pagination Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
   }
-  .readout-item .rl{
-    font-family:var(--font-mono); font-size:10px; color:var(--muted-2);
-    letter-spacing:0.1em; text-transform:uppercase; margin-top:3px;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.2s, width 0.2s, box-shadow 0.2s;
   }
+
+  .dot.active {
+    background: var(--cyan);
+    width: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px rgba(45, 212, 255, 0.6); /* Noktalara da hafif neon */
+  }
+  
   .cluster-caption{
     font-family:var(--font-mono); font-size:11px; color:var(--muted-2);
-    margin-top:16px; text-align:center;
+    margin-top:12px; text-align:center;
   }
 
   /* ---------- PROBLEM STRIP ---------- */
@@ -344,7 +384,6 @@
   /* ---------- MOTION / ACCESSIBILITY ---------- */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    .gauge-progress{transition:none;}
     .btn-download, .feature-card{transition:none;}
   }
   a:focus-visible, button:focus-visible, summary:focus-visible{
@@ -387,40 +426,40 @@
       </div>
     </div>
 
-    <div class="cluster">
-      <div class="gauge-wrap">
-        <svg viewBox="0 0 240 240">
-          <defs>
-            <linearGradient id="gaugeGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#1a8bab"/>
-              <stop offset="100%" stop-color="#6ee7ff"/>
-            </linearGradient>
-          </defs>
-          <g id="tickGroup"></g>
-          <circle class="gauge-track" cx="120" cy="120" r="82" pathLength="300" transform="rotate(-210 120 120)" stroke-dasharray="200 100"/>
-          <circle class="gauge-progress" id="gaugeProgress" cx="120" cy="120" r="82" pathLength="300" transform="rotate(-210 120 120)" stroke-dasharray="0 300"/>
-        </svg>
-        <div class="gauge-center">
-          <div class="gauge-label">Net Kazanç · Bugün</div>
-          <div class="gauge-number" id="gaugeNumber">₺0</div>
-          <div class="gauge-sub">▲ masraflar düşüldü</div>
+    <!-- UYGULAMA İÇİ GÖRÜNTÜLER (NEON MOCKUP CAROUSEL) -->
+    <div class="showcase-container">
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="phone-mockup">
+          <div class="phone-screen" id="appSlider">
+            <div class="slide-track">
+              <!-- Görsel 1 -->
+              <div class="app-slide">
+                <img src="https://i.hizliresim.com/7avvvwfe.jpg" alt="Kurye OS Uygulama Görseli 1">
+              </div>
+              <!-- Görsel 2 (Düzeltilen URL) -->
+              <div class="app-slide">
+                <img src="https://i.hizliresim.com/qyjlnnt0.jpg" alt="Kurye OS Uygulama Görseli 2">
+              </div>
+              <!-- Görsel 3 -->
+              <div class="app-slide">
+                <img src="https://i.hizliresim.com/3y4cy6en.jpg" alt="Kurye OS Uygulama Görseli 3">
+              </div>
+              <!-- Görsel 4 -->
+              <div class="app-slide">
+                <img src="https://i.hizliresim.com/dwn0wltm.jpg" alt="Kurye OS Uygulama Görseli 4">
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- Alt Noktalar (Dots) -->
+        <div class="carousel-dots" id="carouselDots">
+          <span class="dot active" data-index="0"></span>
+          <span class="dot" data-index="1"></span>
+          <span class="dot" data-index="2"></span>
+          <span class="dot" data-index="3"></span>
+        </div>
+        <div class="cluster-caption">uygulama içi görünümler · kaydırılabilir</div>
       </div>
-      <div class="cluster-readout">
-        <div class="readout-item">
-          <div class="rv" id="readoutKm">0.0</div>
-          <div class="rl">KM</div>
-        </div>
-        <div class="readout-item">
-          <div class="rv" id="readoutPaket">0</div>
-          <div class="rl">Paket</div>
-        </div>
-        <div class="readout-item">
-          <div class="rv" id="readoutSaat">0.0</div>
-          <div class="rl">Saat</div>
-        </div>
-      </div>
-      <div class="cluster-caption">örnek gösterge · gerçek verileriniz uygulamada</div>
     </div>
   </div>
 </header>
@@ -566,77 +605,44 @@
 (function(){
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // --- Gauge tick marks (generated so the geometry is always exact) ---
-  var tickGroup = document.getElementById('tickGroup');
-  var cx = 120, cy = 120, rOuter = 100, rInnerMinor = 92, rInnerMajor = 88;
-  var startDeg = -210, sweepDeg = 240; // matches the 240/300 dasharray proportion below
-  var totalTicks = 24;
-  for (var i = 0; i <= totalTicks; i++){
-    var deg = startDeg + (sweepDeg * i / totalTicks);
-    var rad = deg * Math.PI / 180;
-    var isMajor = i % 4 === 0;
-    var rInner = isMajor ? rInnerMajor : rInnerMinor;
-    var x1 = cx + rOuter * Math.cos(rad);
-    var y1 = cy + rOuter * Math.sin(rad);
-    var x2 = cx + rInner * Math.cos(rad);
-    var y2 = cy + rInner * Math.sin(rad);
-    var line = document.createElementNS('http://www.w3.org/2000/svg','line');
-    line.setAttribute('x1', x1.toFixed(2));
-    line.setAttribute('y1', y1.toFixed(2));
-    line.setAttribute('x2', x2.toFixed(2));
-    line.setAttribute('y2', y2.toFixed(2));
-    line.setAttribute('class', 'gauge-tick' + (isMajor ? ' major' : ''));
-    tickGroup.appendChild(line);
-  }
+  // --- App Screenshot Carousel Controller ---
+  const slider = document.getElementById('appSlider');
+  const dots = document.querySelectorAll('.carousel-dots .dot');
 
-  // --- Animated count-up numbers (illustrative dashboard demo values) ---
-  function animateValue(el, start, end, decimals, duration, prefix, suffix){
-    if (reduceMotion){
-      el.textContent = (prefix||'') + end.toLocaleString('tr-TR', {minimumFractionDigits:decimals, maximumFractionDigits:decimals}) + (suffix||'');
-      return;
-    }
-    var startTime = null;
-    function step(ts){
-      if (!startTime) startTime = ts;
-      var progress = Math.min((ts - startTime) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var val = start + (end - start) * eased;
-      el.textContent = (prefix||'') + val.toLocaleString('tr-TR', {minimumFractionDigits:decimals, maximumFractionDigits:decimals}) + (suffix||'');
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
+  if (slider && dots.length > 0) {
+    // Scroll olayında noktaları güncelle
+    slider.addEventListener('scroll', () => {
+      const index = Math.round(slider.scrollLeft / slider.clientWidth);
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+    });
 
-  function animateArc(el, targetUnits, duration){
-    if (reduceMotion){
-      el.setAttribute('stroke-dasharray', targetUnits + ' 300');
-      return;
-    }
-    var startTime = null;
-    function step(ts){
-      if (!startTime) startTime = ts;
-      var progress = Math.min((ts - startTime) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      var val = targetUnits * eased;
-      el.setAttribute('stroke-dasharray', val.toFixed(1) + ' 300');
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
+    // Noktalara tıklandığında kaydır
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        slider.scrollTo({
+          left: slider.clientWidth * i,
+          behavior: 'smooth'
+        });
+      });
+    });
 
-  function runHeroAnimation(){
-    var progressCircle = document.getElementById('gaugeProgress');
-    animateArc(progressCircle, 200 * 0.78, 1600);
-    animateValue(document.getElementById('gaugeNumber'), 0, 1284.50, 2, 1600, '₺');
-    animateValue(document.getElementById('readoutKm'), 0, 187.4, 1, 1400);
-    animateValue(document.getElementById('readoutPaket'), 0, 34, 0, 1200);
-    animateValue(document.getElementById('readoutSaat'), 0, 8.5, 1, 1400);
-  }
+    // Animasyonu sevmeyenler için otomatik kaydırmayı kapatıyoruz
+    if (!reduceMotion) {
+      let autoSlide = setInterval(() => {
+        let index = Math.round(slider.scrollLeft / slider.clientWidth);
+        index = (index + 1) % dots.length;
+        slider.scrollTo({
+          left: slider.clientWidth * index,
+          behavior: 'smooth'
+        });
+      }, 4000);
 
-  if (document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', runHeroAnimation);
-  } else {
-    runHeroAnimation();
+      // Etkileşimde otomatik kaydırmayı durdur
+      slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+      slider.addEventListener('touchstart', () => clearInterval(autoSlide));
+    }
   }
 })();
 </script>
