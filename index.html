@@ -318,6 +318,43 @@
   .trust p{color:var(--muted); font-size:14.5px;}
   .trust a{color:var(--cyan); text-decoration:underline; text-underline-offset:2px;}
 
+  /* ---------- WEB VERSION NOTICE CARD ---------- */
+  .web-notice{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-left:4px solid var(--amber);
+    border-radius:14px;
+    padding:24px 28px;
+    margin-top:28px;
+  }
+  .web-notice h4{
+    font-family:var(--font-display);
+    font-size:20px;
+    text-transform:uppercase;
+    color:var(--text);
+    margin-bottom:8px;
+  }
+  .web-notice p{
+    color:var(--muted);
+    font-size:14.5px;
+    margin-bottom:14px;
+  }
+  .web-notice a.web-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--font-body);
+    font-weight:700;
+    font-size:14px;
+    color:var(--amber);
+    text-decoration:none;
+    transition:color 0.2s;
+  }
+  .web-notice a.web-link:hover{
+    color:#ffc759;
+    text-decoration:underline;
+  }
+
   /* ---------- FAQ ---------- */
   .faq-list{display:flex; flex-direction:column; gap:12px;}
   details{
@@ -354,7 +391,7 @@
   .final-cta h2 em{font-style:normal; color:var(--amber);}
   .final-cta .cta-row{justify-content:center; margin-bottom:14px;}
 
-  /* ---------- FOOTER (RESPONSIVE FIX) ---------- */
+  /* ---------- FOOTER ---------- */
   footer{
     border-top:1px solid var(--border-soft); padding:32px 0;
   }
@@ -388,7 +425,6 @@
     .section{padding:60px 0;}
     .trust{flex-direction:column; align-items:flex-start;}
     
-    /* Mobilde footer öğelerini alt alta ve düzenli hizalama */
     .footer-inner{
       flex-direction: column;
       align-items: center;
@@ -596,6 +632,15 @@
         <summary>GPS takibi pilimi tüketir mi?</summary>
         <p>Arka plan takibi düşük güç modunda çalışacak şekilde ayarlandı ve istediğin an tek dokunuşla kapatabilirsin.</p>
       </details>
+    </div>
+
+    <!-- Web Sürümü Bilgilendirme Kartı -->
+    <div class="web-notice">
+      <h4>Uygulamayı İndirmek İstemiyor musunuz?</h4>
+      <p>Kurye OS'u cihazınıza kurmadan doğrudan tarayıcı üzerinden de kullanabilirsiniz. Ancak bu durumda arka planda otomatik GPS kilometre takip sistemi çalışmayacaktır.</p>
+      <a href="https://gizlibaskan.github.io/kurye-takip/" target="_blank" rel="noopener noreferrer" class="web-link">
+        Web Sitesi Sürümünü Kullan &rarr;
+      </a>
     </div>
   </div>
 </section>
