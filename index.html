@@ -147,24 +147,22 @@
     width: min(100%, 320px);
     background: #111826;
     border-radius: 36px;
-    /* Neon Çerçeve Stil Güncellemeleri */
     border: 3px solid rgba(45, 212, 255, 0.85);
     box-shadow: 
       0 0 15px rgba(45, 212, 255, 0.6),
       0 0 35px rgba(45, 212, 255, 0.35),
       0 25px 50px -12px rgba(0, 0, 0, 0.9);
     overflow: hidden;
-    aspect-ratio: 9 / 19.5; /* Modern telefon görünümü oranları */
+    aspect-ratio: 9 / 19.5;
   }
 
-  /* Ekranın içine hafif düşen neon yansıması */
   .phone-mockup::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: 33px; 
     box-shadow: inset 0 0 20px rgba(45, 212, 255, 0.45);
-    pointer-events: none; /* Tıklamaları engellememesi için */
+    pointer-events: none;
     z-index: 10;
   }
 
@@ -175,11 +173,11 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     display: flex;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
   }
 
   .phone-screen::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
   }
 
   .slide-track {
@@ -196,16 +194,14 @@
     position: relative;
   }
 
-  /* Görsellerin çerçeveye tam oturması için */
   .app-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
-    background: var(--panel); /* Görsel yüklenemezse arkaplan rengi */
+    background: var(--panel);
   }
 
-  /* Slider Pagination Dots */
   .carousel-dots {
     display: flex;
     justify-content: center;
@@ -226,7 +222,7 @@
     background: var(--cyan);
     width: 20px;
     border-radius: 4px;
-    box-shadow: 0 0 8px rgba(45, 212, 255, 0.6); /* Noktalara da hafif neon */
+    box-shadow: 0 0 8px rgba(45, 212, 255, 0.6);
   }
   
   .cluster-caption{
@@ -358,18 +354,30 @@
   .final-cta h2 em{font-style:normal; color:var(--amber);}
   .final-cta .cta-row{justify-content:center; margin-bottom:14px;}
 
-  /* ---------- FOOTER ---------- */
+  /* ---------- FOOTER (RESPONSIVE FIX) ---------- */
   footer{
     border-top:1px solid var(--border-soft); padding:32px 0;
   }
   .footer-inner{
     display:flex; align-items:center; justify-content:space-between;
-    flex-wrap:wrap; gap:12px;
+    flex-wrap:wrap; gap:16px;
+  }
+  .footer-right{
+    display:flex; align-items:center; gap:12px;
+    flex-wrap: wrap;
   }
   .footer-inner p{font-size:13px; color:var(--muted-2);}
   .footer-inner .brand-word{font-size:16px;}
+  .social-link{
+    color:var(--muted);
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: inline-flex; align-items: center;
+  }
+  .social-link:hover{
+    color:var(--cyan);
+    transform: scale(1.1);
+  }
 
-  /* ---------- RESPONSIVE ---------- */
   @media (max-width:860px){
     .hero-grid{grid-template-columns:1fr; gap:40px;}
     .hero{padding:44px 0 48px; text-align:left;}
@@ -379,12 +387,23 @@
     .step:last-child{border-bottom:none;}
     .section{padding:60px 0;}
     .trust{flex-direction:column; align-items:flex-start;}
+    
+    /* Mobilde footer öğelerini alt alta ve düzenli hizalama */
+    .footer-inner{
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+    .footer-right{
+      justify-content: center;
+    }
   }
 
   /* ---------- MOTION / ACCESSIBILITY ---------- */
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
-    .btn-download, .feature-card{transition:none;}
+    .btn-download, .feature-card, .social-link{transition:none;}
   }
   a:focus-visible, button:focus-visible, summary:focus-visible{
     outline:2px solid var(--cyan); outline-offset:3px; border-radius:4px;
@@ -436,7 +455,7 @@
               <div class="app-slide">
                 <img src="https://i.hizliresim.com/7avvvwfe.jpg" alt="Kurye OS Uygulama Görseli 1">
               </div>
-              <!-- Görsel 2 (Düzeltilen URL) -->
+              <!-- Görsel 2 -->
               <div class="app-slide">
                 <img src="https://i.hizliresim.com/qyjlnnt0.jpg" alt="Kurye OS Uygulama Görseli 2">
               </div>
@@ -597,7 +616,16 @@
 <footer>
   <div class="wrap footer-inner">
     <span class="brand-word">KURYE<span style="color:var(--cyan);">OS</span></span>
-    <p>@furkann.sb tarafından geliştirildi. © 2026</p>
+    <div class="footer-right">
+      <p>@furkann.sb tarafından geliştirildi. © 2026</p>
+      <a href="https://www.instagram.com/furkann.sb?igsi=djdreXY5bXNkZGZ5" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+      </a>
+    </div>
   </div>
 </footer>
 
